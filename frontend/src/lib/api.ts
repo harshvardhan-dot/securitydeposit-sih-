@@ -106,28 +106,49 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   const primaryUrl = resolveUrl(path)
   try {
     response = await fetch(primaryUrl, { ...init, headers })
+    // If Render Free is waking up, it might return 502 or 503 Bad Gateway temporarily
+    if ((response.status === 502 || response.status === 503) && primaryUrl.includes('onrender.com')) {
+      await new Promise((resolve) => setTimeout(resolve, 3000))
+      response = await fetch(primaryUrl, { ...init, headers })
+    }
   } catch (primaryErr) {
-    // If request failed (e.g. Vite proxy drop), try direct backend port 8000 if running locally or on local network
-    const isDevClient =
-      typeof window !== 'undefined' &&
-      (window.location.hostname === 'localhost' ||
-        window.location.hostname === '127.0.0.1' ||
-        window.location.hostname.startsWith('192.168.') ||
-        window.location.port === '5173') &&
-      window.location.port !== '8000'
-
-    if (isDevClient && !primaryUrl.startsWith('http')) {
-      const fallbackHost = window.location.hostname === 'localhost' ? '127.0.0.1' : window.location.hostname
-      const fallbackUrl = `http://${fallbackHost}:8000${primaryUrl.startsWith('/') ? '' : '/'}${primaryUrl}`
+    // Retry once for remote backend waking up from cold sleep
+    if (primaryUrl.startsWith('http') && (primaryUrl.includes('onrender.com') || primaryUrl.includes('trycloudflare.com'))) {
       try {
-        response = await fetch(fallbackUrl, { ...init, headers })
-      } catch (fallbackErr) {
-        console.error('API fetch failed on primary and fallback:', { primaryUrl, fallbackUrl, primaryErr, fallbackErr })
-        throw new ApiError(0, 'network_error', 'Cannot reach the portal. Check that the API server is running.')
+        await new Promise((resolve) => setTimeout(resolve, 2500))
+        response = await fetch(primaryUrl, { ...init, headers })
+      } catch {
+        // Continue to fallback check below
       }
-    } else {
-      console.error('API fetch failed:', { primaryUrl, primaryErr })
-      throw new ApiError(0, 'network_error', 'Cannot reach the portal. Check that the API server is running.')
+    }
+
+    if (!response!) {
+      // If request failed (e.g. Vite proxy drop), try direct backend port 8000 if running locally or on local network
+      const isDevClient =
+        typeof window !== 'undefined' &&
+        (window.location.hostname === 'localhost' ||
+          window.location.hostname === '127.0.0.1' ||
+          window.location.hostname.startsWith('192.168.') ||
+          window.location.port === '5173') &&
+        window.location.port !== '8000'
+
+      if (isDevClient && !primaryUrl.startsWith('http')) {
+        const fallbackHost = window.location.hostname === 'localhost' ? '127.0.0.1' : window.location.hostname
+        const fallbackUrl = `http://${fallbackHost}:8000${primaryUrl.startsWith('/') ? '' : '/'}${primaryUrl}`
+        try {
+          response = await fetch(fallbackUrl, { ...init, headers })
+        } catch (fallbackErr) {
+          console.error('API fetch failed on primary and fallback:', { primaryUrl, fallbackUrl, primaryErr, fallbackErr })
+          throw new ApiError(0, 'network_error', 'Cannot reach the portal. Check that the API server is running.')
+        }
+      } else {
+        console.error('API fetch failed:', { primaryUrl, primaryErr })
+        const isRender = primaryUrl.includes('onrender.com')
+        const msg = isRender
+          ? 'Cannot reach the portal. The backend server may be spinning up from idle state (cold start takes 30-50s) - please wait a moment and try again.'
+          : 'Cannot reach the portal. Check that the API server is running.'
+        throw new ApiError(0, 'network_error', msg)
+      }
     }
   }
 

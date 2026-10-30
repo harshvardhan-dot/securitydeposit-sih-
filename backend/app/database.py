@@ -16,11 +16,13 @@ engine_kwargs = {
 
 if not is_sqlite:
     # Recommended settings for Supabase (connection pooler / PgBouncer & direct Postgres)
+    # Scaled down to prevent memory leaks and connection exhaustion on Render Free (512 MB cap)
     engine_kwargs.update({
         "pool_pre_ping": True,
         "pool_recycle": 300,
-        "pool_size": int(os.getenv("DB_POOL_SIZE", "10")),
-        "max_overflow": int(os.getenv("DB_MAX_OVERFLOW", "20")),
+        "pool_size": int(os.getenv("DB_POOL_SIZE", "5")),
+        "max_overflow": int(os.getenv("DB_MAX_OVERFLOW", "5")),
+        "pool_timeout": int(os.getenv("DB_POOL_TIMEOUT", "30")),
     })
 
 engine = create_engine(DATABASE_URL, **engine_kwargs)

@@ -22,7 +22,7 @@ from typing import Any
 
 MODEL_ID = os.getenv("AICTE_BERT_MODEL", "distilbert-base-multilingual-cased")
 NER_MODEL_ID = os.getenv("AICTE_BERT_NER_MODEL", "")
-ENABLED = os.getenv("AICTE_BERT_ENABLED", "1").lower() not in {"0", "false", "no"}
+ENABLED = os.getenv("AICTE_BERT_ENABLED", "0").lower() in {"1", "true", "yes"}
 
 FIELD_PROTOTYPES: dict[str, str] = {
     "fdr_number": "Fixed deposit receipt number issued by the bank",
@@ -168,7 +168,7 @@ def ner_predict(text: str) -> list[dict[str, Any]]:
 def status() -> dict[str, Any]:
     return {
         "enabled": ENABLED,
-        "available": available(),
+        "available": _state["loaded"],
         "model_id": _state["model_id"],
         "dim": _state["dim"],
         "device": _state["device"],

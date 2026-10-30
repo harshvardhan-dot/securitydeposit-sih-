@@ -14,10 +14,10 @@ openpyxl>=3.1
 email-validator>=2.2
 pytesseract>=0.3.13
 
-# Optional: BERT-family encoder stage (FR-8). Install with:
+# Optional: BERT-family encoder stage (FR-8). Can be installed separately:
 #   pip install torch --index-url https://download.pytorch.org/whl/cpu
 #   pip install transformers sentencepiece
 # The portal falls back to hashed n-gram embeddings when these are absent.
-torch>=2.5
-transformers>=4.45
-sentencepiece>=0.2
+# torch>=2.5
+# transformers>=4.45
+# sentencepiece>=0.2
