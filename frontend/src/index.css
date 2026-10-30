@@ -23,47 +23,47 @@
   --color-ink-500: #cfc8b9;
 
   /* text — light */
-  --color-mist-50: #141824;
-  --color-mist-100: #1f2434;
-  --color-mist-200: #333a4e;
-  --color-mist-300: #474f66;
-  --color-mist-400: #5b6478;
-  --color-mist-500: #616a7e;
-  --color-mist-600: #6b7488;
+  --color-mist-50: #0d111d;
+  --color-mist-100: #151a29;
+  --color-mist-200: #262c3f;
+  --color-mist-300: #384157;
+  --color-mist-400: #46506b;
+  --color-mist-500: #525c77;
+  --color-mist-600: #5e6884;
 
   /* accent 1 — lavender (primary) */
-  --color-violet-200: #4638a6;
-  --color-violet-300: #5b4bc4;
-  --color-violet-400: #6c5ce0;
-  --color-violet-500: #5a48d6;
+  --color-violet-200: #3c2ea6;
+  --color-violet-300: #4f3ec4;
+  --color-violet-400: #6250e6;
+  --color-violet-500: #543fe0;
 
   /* accent 2 — mint (secondary) */
-  --color-mint-200: #0a6247;
-  --color-mint-300: #0d7355;
-  --color-mint-400: #108a66;
-  --color-mint-500: #12a077;
+  --color-mint-200: #06543c;
+  --color-mint-300: #097352;
+  --color-mint-400: #0c8c64;
+  --color-mint-500: #0ea677;
 
   /* accent 3 — peach (data) */
-  --color-gold-200: #7a3a1c;
-  --color-gold-300: #8a4620;
-  --color-gold-400: #c2652f;
-  --color-gold-500: #d97a3f;
+  --color-gold-200: #6e3013;
+  --color-gold-300: #883e16;
+  --color-gold-400: #c45d25;
+  --color-gold-500: #dc7232;
 
   /* accent 4 — sky (data) */
-  --color-signal-200: #0b4f6c;
-  --color-signal-300: #0e6285;
-  --color-signal-400: #0c7ba6;
-  --color-signal-500: #0e8fc0;
+  --color-signal-200: #08435d;
+  --color-signal-300: #0b597c;
+  --color-signal-400: #0c76a3;
+  --color-signal-500: #0d8dbf;
 
   /* semantic status */
-  --color-amber-200: #78350f;
-  --color-amber-300: #92400e;
-  --color-amber-400: #d97706;
-  --color-amber-500: #e88d24;
-  --color-rose-200: #8c1d36;
-  --color-rose-300: #a32240;
-  --color-rose-400: #dc4c64;
-  --color-rose-500: #e85d74;
+  --color-amber-200: #6b2e07;
+  --color-amber-300: #893b0b;
+  --color-amber-400: #d67104;
+  --color-amber-500: #ea851c;
+  --color-rose-200: #7b152d;
+  --color-rose-300: #961937;
+  --color-rose-400: #d83d57;
+  --color-rose-500: #e74e67;
 
   /* remapped built-ins used across older pages */
   --color-white: #1b2030;
@@ -98,42 +98,42 @@
   --color-ink-600: #2d3550;
   --color-ink-500: #39435f;
 
-  --color-mist-50: #f7f8fc;
-  --color-mist-100: #eef0f8;
-  --color-mist-200: #dde1ee;
-  --color-mist-300: #c3c9db;
-  --color-mist-400: #9aa3bc;
-  --color-mist-500: #7e88a4;
-  --color-mist-600: #626c88;
+  --color-mist-50: #ffffff;
+  --color-mist-100: #f6f7fc;
+  --color-mist-200: #e3e7f4;
+  --color-mist-300: #c9d0e4;
+  --color-mist-400: #a7b2ce;
+  --color-mist-500: #8c98b6;
+  --color-mist-600: #717d9c;
 
-  --color-violet-200: #ded6ff;
-  --color-violet-300: #c4b5fd;
-  --color-violet-400: #b4a2fc;
-  --color-violet-500: #a78bfa;
+  --color-violet-200: #eee7ff;
+  --color-violet-300: #d4c5ff;
+  --color-violet-400: #beadff;
+  --color-violet-500: #ab95fa;
 
-  --color-mint-200: #c9f9e3;
-  --color-mint-300: #a7f3d0;
-  --color-mint-400: #86ebc0;
-  --color-mint-500: #6ee7b7;
+  --color-mint-200: #d8ffef;
+  --color-mint-300: #a8f9d6;
+  --color-mint-400: #82f1c1;
+  --color-mint-500: #5fe7b3;
 
-  --color-gold-200: #fee0d1;
-  --color-gold-300: #fdba9b;
-  --color-gold-400: #fca98a;
-  --color-gold-500: #f89473;
+  --color-gold-200: #ffecd9;
+  --color-gold-300: #ffc8a8;
+  --color-gold-400: #ffb48e;
+  --color-gold-500: #ff9e76;
 
-  --color-signal-200: #dbf1fe;
-  --color-signal-300: #bae6fd;
-  --color-signal-400: #9adcfb;
-  --color-signal-500: #7dd3fc;
+  --color-signal-200: #e4f5ff;
+  --color-signal-300: #bceaff;
+  --color-signal-400: #93dcfe;
+  --color-signal-500: #72ceff;
 
-  --color-amber-200: #fde3c8;
-  --color-amber-300: #fcd0ae;
-  --color-amber-400: #fbb68f;
-  --color-amber-500: #f59e72;
-  --color-rose-200: #fbd5d9;
-  --color-rose-300: #f8aab4;
-  --color-rose-400: #f47f90;
-  --color-rose-500: #ec5c72;
+  --color-amber-200: #ffeedb;
+  --color-amber-300: #ffdab7;
+  --color-amber-400: #ffbf8c;
+  --color-amber-500: #ffa56a;
+  --color-rose-200: #ffe2e6;
+  --color-rose-300: #ffb5c1;
+  --color-rose-400: #ff8b9e;
+  --color-rose-500: #ff6179;
 
   --color-white: #eef0f8;
   --color-sky-300: #bae6fd;
@@ -272,8 +272,10 @@ body {
     radial-gradient(760px 680px at 52% 118%, rgb(var(--glow-3) / 0.07), transparent 64%);
   color: var(--color-mist-100);
   font-family: var(--font-sans);
+  font-weight: 500;
   font-feature-settings: "ss01" on, "cv01" on;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
@@ -427,7 +429,7 @@ body::before {
     border: 1px solid transparent;
     padding: 0.58rem 1rem;
     font-size: 0.86rem;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.1;
     letter-spacing: 0.01em;
     white-space: nowrap;
@@ -544,8 +546,8 @@ body::before {
   .label {
     display: block;
     margin-bottom: 0.35rem;
-    font-size: 0.7rem;
-    font-weight: 700;
+    font-size: 0.72rem;
+    font-weight: 800;
     letter-spacing: 0.09em;
     text-transform: uppercase;
     color: var(--color-mist-400);
@@ -554,12 +556,12 @@ body::before {
   .badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.32rem;
+    gap: 0.36rem;
     border-radius: 999px;
     border: 1px solid var(--line-strong);
-    padding: 0.18rem 0.55rem;
-    font-size: 0.68rem;
-    font-weight: 700;
+    padding: 0.2rem 0.58rem;
+    font-size: 0.7rem;
+    font-weight: 750;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     line-height: 1.3;
@@ -576,12 +578,14 @@ body::before {
     padding: 0.08rem 0.36rem;
     font-family: var(--font-mono);
     font-size: 0.66rem;
+    font-weight: 600;
     color: var(--color-mist-300);
   }
 
   .hash {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.74rem;
+    font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--color-signal-300);
     word-break: break-all;
@@ -591,16 +595,17 @@ body::before {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    font-size: 0.84rem;
+    font-size: 0.86rem;
+    font-weight: 500;
   }
   .table thead th {
     padding: 0.7rem 0.9rem;
     text-align: left;
-    font-size: 0.66rem;
-    font-weight: 700;
+    font-size: 0.68rem;
+    font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-mist-500);
+    color: var(--color-mist-400);
     border-bottom: 1px solid var(--line-strong);
     white-space: nowrap;
   }
@@ -621,15 +626,16 @@ body::before {
 
   .section-title {
     font-family: var(--font-display);
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.74rem;
+    font-weight: 750;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-mist-500);
+    color: var(--color-mist-400);
   }
 
   .tile-value {
     font-family: var(--font-display);
+    font-weight: 750;
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.03em;
   }
@@ -645,20 +651,34 @@ body::before {
 
 /* -------------------------------------------------------------- icon tiles */
 :root {
-  --tile-lavender: 91 75 196;
-  --tile-mint: 13 115 85;
-  --tile-peach: 194 101 47;
-  --tile-sky: 12 123 166;
-  --tile-rose: 163 34 64;
-  --tile-amber: 146 64 14;
+  --tile-lavender: 84 62 214;
+  --tile-mint: 8 135 96;
+  --tile-peach: 215 95 38;
+  --tile-sky: 9 130 182;
+  --tile-rose: 196 26 62;
+  --tile-amber: 182 86 11;
 }
 [data-theme="dark"] {
-  --tile-lavender: 196 181 253;
-  --tile-mint: 167 243 208;
-  --tile-peach: 253 186 155;
-  --tile-sky: 186 230 253;
-  --tile-rose: 248 170 180;
-  --tile-amber: 252 208 174;
+  --tile-lavender: 208 190 255;
+  --tile-mint: 130 248 196;
+  --tile-peach: 255 188 156;
+  --tile-sky: 160 234 255;
+  --tile-rose: 255 158 178;
+  --tile-amber: 255 214 170;
+}
+
+/* ------------------------------------------------------------- global icon enhancement */
+svg.lucide,
+.lucide {
+  stroke-width: 2.3px !important;
+  filter: drop-shadow(0 0 2px currentColor);
+  vertical-align: middle;
+  transition: filter 180ms var(--ease-luminous), transform 180ms var(--ease-luminous), stroke-width 180ms ease;
+}
+
+[data-theme="dark"] svg.lucide,
+[data-theme="dark"] .lucide {
+  filter: drop-shadow(0 0 5px currentColor) brightness(1.25);
 }
 
 .icon-tile {
@@ -667,14 +687,15 @@ body::before {
   place-items: center;
   flex: none;
   border-radius: 14px;
-  border: 1px solid rgb(var(--tile) / 0.38);
+  border: 1.5px solid rgb(var(--tile) / 0.52);
   background:
-    linear-gradient(158deg, rgb(var(--tile) / 0.22), rgb(var(--tile) / 0.07));
+    linear-gradient(158deg, rgb(var(--tile) / 0.28), rgb(var(--tile) / 0.12));
   color: rgb(var(--tile));
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgb(var(--tile) / 0.16),
-    0 8px 16px -10px rgb(var(--tile) / 0.75);
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgb(var(--tile) / 0.25),
+    0 8px 18px -8px rgb(var(--tile) / 0.8),
+    0 0 16px rgb(var(--tile) / 0.35);
   transform-style: preserve-3d;
   transition:
     transform 160ms var(--ease-luminous),
@@ -683,21 +704,29 @@ body::before {
   will-change: transform;
 }
 [data-theme="dark"] .icon-tile {
+  border: 1.5px solid rgb(var(--tile) / 0.65);
+  background:
+    linear-gradient(158deg, rgb(var(--tile) / 0.35), rgb(var(--tile) / 0.16));
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.16),
-    inset 0 -1px 0 rgb(var(--tile) / 0.2),
-    0 10px 22px -12px rgb(var(--tile) / 0.9);
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    inset 0 -1px 0 rgb(var(--tile) / 0.35),
+    0 10px 24px -10px rgb(var(--tile)),
+    0 0 22px rgb(var(--tile) / 0.45);
 }
 .icon-tile:hover {
   transform: translateY(-2px) rotateX(8deg) rotateY(-8deg);
-  border-color: rgb(var(--tile) / 0.6);
+  border-color: rgb(var(--tile) / 0.8);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 16px 28px -14px rgb(var(--tile) / 0.85),
-    0 0 22px rgb(var(--tile) / 0.28);
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    0 16px 32px -12px rgb(var(--tile)),
+    0 0 28px rgb(var(--tile) / 0.5);
 }
 .icon-tile:active {
   transform: translateY(0) scale(0.94);
+}
+.icon-tile svg.lucide {
+  stroke-width: 2.5px !important;
+  filter: drop-shadow(0 0 8px currentColor) brightness(1.35) !important;
 }
 .icon-tile-sm { height: 30px; width: 30px; border-radius: 10px; }
 .icon-tile-md { height: 36px; width: 36px; }
@@ -707,54 +736,54 @@ body::before {
 /* ------------------------------------------------------------- typography */
 .type-hero {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 800;
   font-size: clamp(2.5rem, 5.4vw, 4.5rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
 }
 .type-h1 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 750;
   font-size: 2.5rem;
   line-height: 1.08;
   letter-spacing: -0.03em;
 }
 .type-h2 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.75rem;
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
 .type-h3 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.25rem;
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
 .type-card-title {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   line-height: 1.35;
   letter-spacing: -0.01em;
 }
 .type-body {
   font-family: var(--font-sans);
-  font-weight: 400;
+  font-weight: 500;
   font-size: 1rem;
   line-height: 1.65;
 }
 .type-body-sm {
   font-family: var(--font-sans);
-  font-weight: 400;
+  font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.6;
 }
 .type-label {
   font-family: var(--font-sans);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.75rem;
   line-height: 1.4;
   letter-spacing: 0.1em;
@@ -762,7 +791,7 @@ body::before {
 }
 .type-button {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.875rem;
   line-height: 1.1;
   letter-spacing: 0.01em;
@@ -1090,3 +1119,45 @@ body::before {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
+
+/* ----------------------------------------------------------- typography & icon clarity */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--color-mist-50);
+}
+
+p, div, li, input, select, textarea {
+  font-weight: 500;
+}
+
+b, strong {
+  font-weight: 750;
+  color: var(--color-mist-50);
+}
+
+/* Enhanced icon prominence across all pages */
+svg.lucide {
+  stroke-width: 2.25px !important;
+}
+
+[data-theme="dark"] svg.lucide {
+  filter: drop-shadow(0 0 4px currentColor) brightness(1.25);
+}
+
+/* High-glow accent icons */
+.text-violet-300 svg, svg.text-violet-300 {
+  filter: drop-shadow(0 0 8px rgba(196, 181, 253, 0.85)) !important;
+}
+.text-mint-300 svg, svg.text-mint-300 {
+  filter: drop-shadow(0 0 8px rgba(167, 243, 208, 0.85)) !important;
+}
+.text-signal-300 svg, svg.text-signal-300 {
+  filter: drop-shadow(0 0 8px rgba(186, 230, 253, 0.85)) !important;
+}
+.text-amber-300 svg, svg.text-amber-300 {
+  filter: drop-shadow(0 0 8px rgba(253, 208, 174, 0.85)) !important;
+}
+.text-rose-300 svg, svg.text-rose-300 {
+  filter: drop-shadow(0 0 8px rgba(248, 170, 180, 0.85)) !important;
+}
+

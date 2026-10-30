@@ -209,14 +209,14 @@ export default function Layout() {
   const navBody = (
     <div className="flex h-full flex-col">
       <div className="flex items-center gap-3 px-5 pb-5 pt-5">
-        <span className="relative grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-violet-300/30 bg-violet-300/10 text-violet-300 shadow-[0_0_30px_-6px_rgba(196,181,253,0.55)]">
-          <ShieldCheck size={21} />
+        <span className="relative grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-violet-300/40 bg-violet-300/20 text-violet-300 shadow-[0_0_35px_-4px_rgba(196,181,253,0.75)]">
+          <ShieldCheck size={22} className="drop-shadow-[0_0_8px_rgba(196,181,253,0.85)]" />
         </span>
         <div className="min-w-0">
-          <p className="font-display text-sm font-semibold tracking-tight text-mist-50">
-            {t('brand')} <span className="text-gradient">FDR</span>
+          <p className="font-display text-sm font-bold tracking-tight text-mist-50">
+            {t('brand')} <span className="text-gradient font-extrabold">FDR</span>
           </p>
-          <p className="truncate text-[0.62rem] uppercase tracking-[0.14em] text-mist-500">{t('brandSub')}</p>
+          <p className="truncate text-[0.62rem] font-bold uppercase tracking-[0.14em] text-mist-400">{t('brandSub')}</p>
         </div>
       </div>
 
@@ -225,7 +225,7 @@ export default function Layout() {
       <nav className="flex-1 space-y-5 overflow-y-auto px-3 pb-4">
         {visibleGroups.map((group) => (
           <div key={group.label}>
-            <p className="mb-1.5 px-2 text-[0.58rem] font-bold uppercase tracking-[0.2em] text-mist-600">{group.label}</p>
+            <p className="mb-1.5 px-2 text-[0.62rem] font-extrabold uppercase tracking-[0.2em] text-mist-400">{group.label}</p>
             <div className="space-y-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon
@@ -236,10 +236,10 @@ export default function Layout() {
                     end={item.end}
                     className={({ isActive }) =>
                       clsx(
-                        'group relative flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-[0.8rem] font-medium transition duration-200',
+                        'group relative flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-[0.82rem] font-semibold transition duration-200',
                         isActive
-                          ? 'bg-violet-300/[0.09] text-mist-50 shadow-[inset_0_0_0_1px_rgba(196,181,253,0.2),0_0_26px_-10px_rgba(196,181,253,0.7)]'
-                          : 'text-mist-400 hover:bg-white/[0.04] hover:text-mist-100',
+                          ? 'bg-violet-300/[0.14] text-mist-50 shadow-[inset_0_0_0_1px_rgba(196,181,253,0.35),0_0_30px_-8px_rgba(196,181,253,0.85)] font-bold'
+                          : 'text-mist-300 hover:bg-white/[0.06] hover:text-mist-50',
                       )
                     }
                   >
@@ -249,13 +249,18 @@ export default function Layout() {
                           className={clsx(
                             'absolute left-0 top-1/2 h-5 w-[2px] -translate-y-1/2 rounded-full bg-violet-300 transition-all duration-300',
                             isActive
-                              ? 'opacity-100 shadow-[0_0_12px_2px_rgba(196,181,253,0.75)]'
+                              ? 'opacity-100 shadow-[0_0_12px_2px_rgba(196,181,253,0.9)]'
                               : 'opacity-0',
                           )}
                         />
                         <Icon
-                          size={16}
-                          className={isActive ? 'text-violet-300' : 'text-mist-500 group-hover:text-mist-300'}
+                          size={17}
+                          className={clsx(
+                            'transition duration-200',
+                            isActive
+                              ? 'text-violet-300 drop-shadow-[0_0_8px_rgba(196,181,253,0.9)]'
+                              : 'text-mist-400 group-hover:text-violet-300 group-hover:drop-shadow-[0_0_6px_rgba(196,181,253,0.7)]',
+                          )}
                         />
                         <span className="truncate">{t(item.labelKey)}</span>
                       </>
@@ -271,23 +276,23 @@ export default function Layout() {
       <div className="border-t border-white/8 p-3">
         <Link
           to="/track"
-          className="mb-2 flex items-center gap-2 rounded-xl border border-white/8 bg-white/[0.03] px-3 py-2 text-[0.72rem] text-mist-400 transition hover:border-mint-300/35 hover:text-mint-200"
+          className="mb-2 flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-[0.74rem] font-semibold text-mist-300 transition hover:border-mint-300/45 hover:text-mint-200"
         >
-          <Globe size={14} />
+          <Globe size={15} className="text-mint-300 drop-shadow-[0_0_6px_rgba(167,243,208,0.8)]" />
           {t('nav.tracker')}
-          <ChevronRight size={13} className="ml-auto" />
+          <ChevronRight size={14} className="ml-auto" />
         </Link>
-        <div className="flex items-center justify-between rounded-xl border border-white/8 bg-white/[0.03] px-3 py-2">
-          <span className="inline-flex items-center gap-1.5 text-[0.64rem] text-mist-500">
+        <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 font-medium">
+          <span className="inline-flex items-center gap-1.5 text-[0.66rem] font-semibold text-mist-300">
             <span
               className={clsx(
                 'h-1.5 w-1.5 rounded-full',
-                chainOk ? 'bg-mint-300 shadow-[0_0_8px_1px_rgba(167,243,208,0.7)]' : 'bg-rose-400',
+                chainOk ? 'bg-mint-300 shadow-[0_0_8px_2px_rgba(167,243,208,0.8)]' : 'bg-rose-400',
               )}
             />
             {chainOk ? 'Chain intact' : 'Chain broken'}
           </span>
-          <span className="text-[0.6rem] uppercase tracking-wider text-mist-600">v1.0</span>
+          <span className="text-[0.62rem] font-bold uppercase tracking-wider text-mist-400">v1.0</span>
         </div>
       </div>
     </div>
@@ -327,9 +332,9 @@ export default function Layout() {
               <Menu size={19} />
             </button>
 
-            <div className="hidden min-w-0 items-center gap-2 text-xs text-mist-500 sm:flex">
-              <Sparkles size={13} className="text-violet-300" />
-              <span className="font-semibold uppercase tracking-[0.16em]">{pageTitle}</span>
+            <div className="hidden min-w-0 items-center gap-2 text-xs sm:flex">
+              <Sparkles size={14} className="text-violet-300 drop-shadow-[0_0_8px_rgba(196,181,253,0.9)]" />
+              <span className="font-bold uppercase tracking-[0.16em] text-mist-200">{pageTitle}</span>
             </div>
 
             <form onSubmit={handleSearch} className="relative ml-auto hidden w-full max-w-xs md:block">

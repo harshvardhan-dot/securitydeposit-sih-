@@ -145,24 +145,24 @@ export default function DashboardPage() {
       </Reveal>
 
       <div className="grid gap-3 rounded-2xl border border-[color:var(--line)] inset-well p-3 sm:grid-cols-2 xl:grid-cols-4">
-        <div className="flex items-center gap-3 rounded-xl bg-white/[0.02] px-3 py-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl border border-mint-400/20 bg-mint-400/10 text-mint-300">
-            <ScanLine size={17} />
+        <div className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-3 py-2.5">
+          <span className="grid h-9 w-9 place-items-center rounded-xl border border-mint-400/40 bg-mint-400/20 text-mint-300 shadow-[0_0_15px_rgba(167,243,208,0.35)]">
+            <ScanLine size={18} className="drop-shadow-[0_0_6px_rgba(167,243,208,0.85)]" />
           </span>
           <div className="min-w-0">
-            <p className="text-[0.6rem] uppercase tracking-[0.16em] text-mist-600">OCR engine</p>
-            <p className="truncate text-xs font-semibold text-mist-100">{data.ai.ocr}</p>
+            <p className="text-[0.62rem] font-bold uppercase tracking-[0.16em] text-mist-400">OCR engine</p>
+            <p className="truncate text-xs font-bold text-mist-50">{data.ai.ocr}</p>
           </div>
           <Badge tone="green" className="ml-auto">live</Badge>
         </div>
-        <div className="flex items-center gap-3 rounded-xl bg-white/[0.02] px-3 py-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl border border-signal-400/20 bg-signal-400/10 text-signal-300">
-            <Sparkles size={17} />
+        <div className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-3 py-2.5">
+          <span className="grid h-9 w-9 place-items-center rounded-xl border border-signal-400/40 bg-signal-400/20 text-signal-300 shadow-[0_0_15px_rgba(186,230,253,0.35)]">
+            <Sparkles size={18} className="drop-shadow-[0_0_6px_rgba(186,230,253,0.85)]" />
           </span>
           <div className="min-w-0">
-            <p className="text-[0.6rem] uppercase tracking-[0.16em] text-mist-600">Field model</p>
-            <p className="truncate text-xs font-semibold text-mist-100">{bert.model_id.split('/').pop()}</p>
-            <p className="truncate text-[0.62rem] text-mist-500">
+            <p className="text-[0.62rem] font-bold uppercase tracking-[0.16em] text-mist-400">Field model</p>
+            <p className="truncate text-xs font-bold text-mist-50">{bert.model_id.split('/').pop()}</p>
+            <p className="truncate text-[0.64rem] font-medium text-mist-400">
               {bert.dim ? `${bert.dim}-dim embedding` : 'hashed n-gram fallback'}
             </p>
           </div>
@@ -170,41 +170,41 @@ export default function DashboardPage() {
             {bert.available ? 'BERT' : 'fallback'}
           </Badge>
         </div>
-        <div className="flex items-center gap-3 rounded-xl bg-white/[0.02] px-3 py-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 text-mist-300">
-            <Layers size={17} />
+        <div className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-3 py-2.5">
+          <span className="grid h-9 w-9 place-items-center rounded-xl border border-white/20 bg-white/10 text-mist-200 shadow-[0_0_15px_rgba(255,255,255,0.15)]">
+            <Layers size={18} className="drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]" />
           </span>
           <div className="min-w-0">
-            <p className="text-[0.6rem] uppercase tracking-[0.16em] text-mist-600">Ledger chain</p>
-            <p className="truncate text-xs font-semibold text-mist-100">
+            <p className="text-[0.62rem] font-bold uppercase tracking-[0.16em] text-mist-400">Ledger chain</p>
+            <p className="truncate text-xs font-bold text-mist-50">
               {chainOk ? 'All blocks verified' : `Broken at #${data.chain.broken_at}`}
             </p>
-            <p className="truncate font-mono text-[0.6rem] text-mist-500">{data.chain.blocks} blocks · {data.chain.head_hash.slice(0, 14)}…</p>
+            <p className="truncate font-mono text-[0.62rem] font-medium text-mist-400">{data.chain.blocks} blocks · {data.chain.head_hash.slice(0, 14)}…</p>
           </div>
           <Badge tone={chainOk ? 'green' : 'red'} className="ml-auto">
             {chainOk ? 'intact' : 'broken'}
           </Badge>
         </div>
-        <div className="flex items-center gap-3 rounded-xl bg-white/[0.02] px-3 py-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl border border-amber-400/20 bg-amber-400/10 text-amber-300">
-            <BellRing size={17} />
+        <div className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-3 py-2.5">
+          <span className="grid h-9 w-9 place-items-center rounded-xl border border-amber-400/40 bg-amber-400/20 text-amber-300 shadow-[0_0_15px_rgba(253,208,174,0.35)]">
+            <BellRing size={18} className="drop-shadow-[0_0_6px_rgba(253,208,174,0.85)]" />
           </span>
           <div className="min-w-0">
-            <p className="text-[0.6rem] uppercase tracking-[0.16em] text-mist-600">Reminder ladder</p>
-            <p className="truncate text-xs font-semibold text-mist-100">
+            <p className="text-[0.62rem] font-bold uppercase tracking-[0.16em] text-mist-400">Reminder ladder</p>
+            <p className="truncate text-xs font-bold text-mist-50">
               {data.reminders_pending} unacknowledged
             </p>
-            <p className="truncate text-[0.62rem] text-mist-500">
+            <p className="truncate text-[0.64rem] font-medium text-mist-400">
               {data.reminder_ladder.map((stage) => (stage === 0 ? 'expiry' : `${stage}d`)).join(' → ')}
             </p>
           </div>
           <button
             type="button"
             onClick={() => navigate('/reminders')}
-            className="ml-auto text-mist-500 transition hover:text-amber-300"
+            className="ml-auto text-mist-400 transition hover:text-amber-300"
             aria-label="Open reminders"
           >
-            <ArrowRight size={15} />
+            <ArrowRight size={16} />
           </button>
         </div>
       </div>

@@ -230,12 +230,12 @@ export default function LoginPage() {
                 {FEATURES.map(({ icon: Icon, title, detail }) => (
                   <TiltCard key={title} intensity={8} className="card-flat p-3.5">
                     <div className="flex items-start gap-2.5">
-                      <span className="tilt-layer-1 grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-violet-300/35 bg-violet-300/10 text-violet-300">
-                        <Icon size={15} />
+                      <span className="tilt-layer-1 grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-violet-300/40 bg-violet-300/20 text-violet-300 shadow-[0_0_15px_rgba(196,181,253,0.35)]">
+                        <Icon size={16} className="text-violet-300 drop-shadow-[0_0_6px_rgba(196,181,253,0.85)]" />
                       </span>
                       <span className="tilt-layer-2">
-                        <span className="block text-[0.74rem] font-semibold text-mist-100">{title}</span>
-                        <span className="mt-0.5 block text-[0.66rem] leading-relaxed text-mist-500">{detail}</span>
+                        <span className="block text-[0.76rem] font-bold text-mist-50">{title}</span>
+                        <span className="mt-0.5 block text-[0.68rem] font-medium leading-relaxed text-mist-400">{detail}</span>
                       </span>
                     </div>
                   </TiltCard>
@@ -274,17 +274,17 @@ export default function LoginPage() {
                 />
                 <div className="relative flex items-center justify-between gap-3">
                   <div>
-                    <h2 className="font-display text-xl font-semibold tracking-tight text-mist-50">
+                    <h2 className="font-display text-xl font-bold tracking-tight text-mist-50">
                       {step === 'credentials' ? 'Secure sign in' : 'Two-factor verification'}
                     </h2>
-                    <p className="mt-1 text-xs text-mist-500">
+                    <p className="mt-1 text-xs font-medium text-mist-400">
                       {step === 'credentials'
                         ? 'Use your official AICTE or institution account.'
                         : `Enter the 6-digit code for ${email}.`}
                     </p>
                   </div>
-                  <span className="grid h-10 w-10 place-items-center rounded-xl border border-violet-300/35 bg-violet-300/10 text-violet-300">
-                    {step === 'credentials' ? <Lock size={18} /> : <KeyRound size={18} />}
+                  <span className="grid h-10 w-10 place-items-center rounded-xl border border-violet-300/40 bg-violet-300/20 text-violet-300 shadow-[0_0_15px_rgba(196,181,253,0.35)]">
+                    {step === 'credentials' ? <Lock size={19} className="drop-shadow-[0_0_6px_rgba(196,181,253,0.85)]" /> : <KeyRound size={19} className="drop-shadow-[0_0_6px_rgba(196,181,253,0.85)]" />}
                   </span>
                 </div>
               </div>
@@ -489,9 +489,9 @@ export default function LoginPage() {
                 className="flex w-full items-center justify-between gap-3 px-5 py-3.5 text-left"
               >
                 <span className="flex items-center gap-2">
-                  <Landmark size={15} className="text-violet-300" />
-                  <span className="text-xs font-semibold text-mist-100">Demo accounts</span>
-                  <span className="badge border-[color:var(--line-strong)] bg-[color:var(--inset-bg)] text-mist-400">
+                  <Landmark size={16} className="text-violet-300 drop-shadow-[0_0_6px_rgba(196,181,253,0.85)]" />
+                  <span className="text-xs font-bold text-mist-50">Demo accounts</span>
+                  <span className="badge border-violet-300/30 bg-violet-300/10 text-violet-300">
                     {accounts.length || 7}
                   </span>
                 </span>
@@ -518,7 +518,7 @@ export default function LoginPage() {
                                 selected ? 'bg-violet-300/12' : 'hover:bg-violet-300/[0.06]'
                               }`}
                             >
-                              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-violet-300/30 bg-violet-300/10 text-[0.6rem] font-bold text-violet-300">
+                              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-violet-300/40 bg-violet-300/20 text-[0.62rem] font-bold text-violet-200">
                                 {account.name
                                   .split(' ')
                                   .filter(Boolean)
@@ -527,15 +527,15 @@ export default function LoginPage() {
                                   .join('')}
                               </span>
                               <span className="min-w-0 flex-1">
-                                <span className="block truncate text-[0.74rem] font-medium text-mist-100">
+                                <span className="block truncate text-[0.76rem] font-bold text-mist-50">
                                   {account.name}
                                 </span>
-                                <span className="block truncate text-[0.64rem] text-mist-500">{account.email}</span>
+                                <span className="block truncate text-[0.66rem] font-medium text-mist-400">{account.email}</span>
                               </span>
                               {selected ? (
-                                <CircleCheckBig size={14} className="shrink-0 text-violet-300" />
+                                <CircleCheckBig size={15} className="shrink-0 text-violet-300 drop-shadow-[0_0_6px_rgba(196,181,253,0.8)]" />
                               ) : (
-                                <ChevronRight size={13} className="shrink-0 text-mist-600" />
+                                <ChevronRight size={13} className="shrink-0 text-mist-400" />
                               )}
                             </button>
                           )

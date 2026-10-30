@@ -26,15 +26,15 @@ export function PageHeader({
     <header className="relative mb-7 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
       <div className="min-w-0">
         {eyebrow ? (
-          <div className="mb-2.5 flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-violet-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_12px_2px_rgba(196,181,253,0.7)]" />
+          <div className="mb-2.5 flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-violet-300">
+            <span className="h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_12px_2px_rgba(196,181,253,0.8)]" />
             {eyebrow}
           </div>
         ) : null}
-        <h1 className="font-display text-[1.7rem] font-semibold leading-[1.12] tracking-[-0.03em] text-mist-50 sm:text-[2rem]">
+        <h1 className="font-display text-[1.7rem] font-bold leading-[1.12] tracking-[-0.03em] text-mist-50 sm:text-[2rem]">
           {title}
         </h1>
-        {subtitle ? <p className="mt-2 max-w-2xl text-sm leading-relaxed text-mist-400">{subtitle}</p> : null}
+        {subtitle ? <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-mist-400">{subtitle}</p> : null}
       </div>
       {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
     </header>
@@ -65,8 +65,8 @@ export function SectionHeading({
   return (
     <div className="mb-4 flex items-start justify-between gap-3">
       <div>
-        <h2 className="font-display text-[0.95rem] font-semibold tracking-tight text-white">{title}</h2>
-        {hint ? <p className="mt-0.5 text-xs text-mist-500">{hint}</p> : null}
+        <h2 className="font-display text-[1rem] font-bold tracking-tight text-white">{title}</h2>
+        {hint ? <p className="mt-0.5 text-xs font-medium text-mist-400">{hint}</p> : null}
       </div>
       {action}
     </div>
@@ -75,17 +75,17 @@ export function SectionHeading({
 
 /* ------------------------------------------------------------------ badges */
 const BADGE_TONES: Record<string, string> = {
-  slate: 'border-slate-400/25 bg-slate-400/10 text-slate-300',
-  blue: 'border-sky-400/30 bg-sky-400/10 text-sky-300',
-  teal: 'border-teal-400/30 bg-teal-400/10 text-teal-300',
-  green: 'border-mint-400/35 bg-mint-400/10 text-mint-300',
-  amber: 'border-amber-400/35 bg-amber-400/10 text-amber-300',
-  red: 'border-rose-400/35 bg-rose-400/10 text-rose-300',
-  violet: 'border-violet-400/35 bg-violet-400/10 text-violet-300',
-  indigo: 'border-indigo-400/35 bg-indigo-400/10 text-indigo-300',
-  grey: 'border-slate-500/25 bg-slate-500/10 text-slate-400',
-  cyan: 'border-signal-400/35 bg-signal-400/10 text-signal-300',
-  gold: 'border-gold-400/35 bg-gold-400/10 text-gold-300',
+  slate: 'border-slate-400/40 bg-slate-400/15 text-slate-200 font-bold',
+  blue: 'border-sky-400/45 bg-sky-400/15 text-sky-200 font-bold',
+  teal: 'border-teal-400/45 bg-teal-400/15 text-teal-200 font-bold',
+  green: 'border-mint-400/50 bg-mint-400/15 text-mint-200 font-bold',
+  amber: 'border-amber-400/50 bg-amber-400/15 text-amber-200 font-bold',
+  red: 'border-rose-400/50 bg-rose-400/15 text-rose-200 font-bold',
+  violet: 'border-violet-400/50 bg-violet-400/15 text-violet-200 font-bold',
+  indigo: 'border-indigo-400/50 bg-indigo-400/15 text-indigo-200 font-bold',
+  grey: 'border-slate-500/40 bg-slate-500/15 text-slate-300 font-bold',
+  cyan: 'border-signal-400/50 bg-signal-400/15 text-signal-200 font-bold',
+  gold: 'border-gold-400/50 bg-gold-400/15 text-gold-200 font-bold',
 }
 
 export function Badge({
@@ -226,9 +226,9 @@ export function StatTile({
       />
       <div className="relative flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="type-label text-[0.68rem] text-mist-500">{label}</p>
-          <p className="tile-value mt-2 text-[1.55rem] font-semibold leading-none text-mist-50">{value}</p>
-          {hint ? <p className="mt-1.5 text-[0.7rem] text-mist-500">{hint}</p> : null}
+          <p className="type-label text-[0.72rem] font-bold text-mist-400">{label}</p>
+          <p className="tile-value mt-2 text-[1.65rem] font-bold leading-none text-mist-50">{value}</p>
+          {hint ? <p className="mt-1.5 text-[0.72rem] font-medium text-mist-400">{hint}</p> : null}
         </div>
         {icon ? <IconTile tone={TILE_TONES[tone] ?? 'lavender'} size="md">{icon}</IconTile> : null}
       </div>
