@@ -1,0 +1,26 @@
+/* Explicit switch in Settings → Appearance. Mirrors the system preference. */
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+[data-reduced-motion="true"] .ambient-orb,
+[data-reduced-motion="true"] .spotlight,
+[data-reduced-motion="true"] .stat-orb::before {
+  display: none;
+}
+[data-reduced-motion="true"] .tilt-card:hover,
+[data-reduced-motion="true"] .icon-tile:hover,
+[data-reduced-motion="true"] .card-interactive:hover {
+  transform: none;
+}
+[data-reduced-motion="true"] .cube3d {
+  animation: none;
+}
+[data-reduced-motion="true"] .dropzone,
+[data-reduced-motion="true"] .dropzone-active {
+  transform: none;
+}

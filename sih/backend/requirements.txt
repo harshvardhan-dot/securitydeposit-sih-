@@ -1,0 +1,20 @@
+fastapi>=0.115
+uvicorn[standard]>=0.32
+sqlalchemy>=2.0
+cryptography>=43
+pypdf>=5.1
+pillow>=11
+python-multipart>=0.0.12
+PyJWT>=2.9
+fpdf2>=2.8
+openpyxl>=3.1
+email-validator>=2.2
+pytesseract>=0.3.13
+
+# Optional: BERT-family encoder stage (FR-8). Install with:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   pip install transformers sentencepiece
+# The portal falls back to hashed n-gram embeddings when these are absent.
+torch>=2.5
+transformers>=4.45
+sentencepiece>=0.2
