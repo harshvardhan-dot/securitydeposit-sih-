@@ -44,6 +44,16 @@ def get_current_user(
         raise _error("account_inactive", "This account is not active. Contact the administrator.", status.HTTP_403_FORBIDDEN)
 
     now = datetime.utcnow()
+    token_iat = claims.get("iat")
+    if token_iat:
+        try:
+            iat_dt = datetime.utcfromtimestamp(token_iat)
+            if not user.last_seen_at or user.last_seen_at < iat_dt:
+                user.last_seen_at = now
+                db.commit()
+        except Exception:
+            pass
+
     if user.last_seen_at and now - user.last_seen_at > timedelta(minutes=IDLE_TIMEOUT_MINUTES):
         raise _error("session_timeout", "You were signed out after 30 minutes of inactivity.", status.HTTP_401_UNAUTHORIZED)
     if not user.last_seen_at or (now - user.last_seen_at).total_seconds() > 30:

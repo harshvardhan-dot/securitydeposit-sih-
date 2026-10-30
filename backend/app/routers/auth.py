@@ -108,7 +108,9 @@ def login(payload: LoginIn, request: Request, db: Session = Depends(get_db)):
             }
         return response
 
-    user.last_login_at = datetime.utcnow()
+    now = datetime.utcnow()
+    user.last_login_at = now
+    user.last_seen_at = now
     if not user.public_key:
         public_key, sealed = generate_signing_keypair()
         user.public_key, user.private_key_enc = public_key, sealed
@@ -139,7 +141,9 @@ def verify_mfa(payload: MfaIn, request: Request, db: Session = Depends(get_db)):
             detail={"code": "mfa_invalid", "message": "That verification code is not correct. Check the app and try again."},
         )
 
-    user.last_login_at = datetime.utcnow()
+    now = datetime.utcnow()
+    user.last_login_at = now
+    user.last_seen_at = now
     if not user.public_key:
         public_key, sealed = generate_signing_keypair()
         user.public_key, user.private_key_enc = public_key, sealed

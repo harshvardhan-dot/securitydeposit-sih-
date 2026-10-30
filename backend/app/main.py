@@ -11,7 +11,8 @@ from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .config import APP_NAME, CORS_ORIGINS, DATA_DIR, ENV, VERSION
-from .database import Base, SessionLocal, engine
+from .database import Base, SessionLocal, engine, is_sqlite
+from sqlalchemy import text
 from .routers import (
     admin,
     ai,
@@ -71,7 +72,7 @@ def create_app() -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=CORS_ORIGINS,
-        allow_origin_regex=r"^https?://((localhost|127\.0\.0\.1)(:[0-9]+)?|.*\.vercel\.app|.*\.railway\.app|.*\.onrender\.com)$",
+        allow_origin_regex=r"^https?://((localhost|127\.0\.0\.1)(:[0-9]+)?|.*\.vercel\.app|.*\.railway\.app|.*\.onrender\.com|.*\.trycloudflare\.com|.*\.localtunnel\.me|.*\.ngrok-free\.app|.*\.ngrok\.io)$",
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -92,7 +93,7 @@ def create_app() -> FastAPI:
             "img-src 'self' data: blob: https:; "
             "style-src 'self' 'unsafe-inline' https:; "
             "script-src 'self' 'unsafe-inline' https:; "
-            "connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://*.vercel.app https://*.supabase.co wss://*.supabase.co https:; "
+            "connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://*.vercel.app https://*.supabase.co wss://*.supabase.co https://*.trycloudflare.com https://*.localtunnel.me https:; "
             "font-src 'self' data: https:; "
             "frame-ancestors 'none'",
         )
@@ -110,21 +111,50 @@ def create_app() -> FastAPI:
             content={"error": {"code": f"http_{exc.status_code}", "message": str(detail)}, "detail": detail},
         )
 
+    @app.exception_handler(Exception)
+    async def unhandled_error(_request: Request, exc: Exception):
+        import logging
+        logging.getLogger("uvicorn.error").error(f"Unhandled server error: {exc}", exc_info=True)
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": {
+                    "code": "internal_server_error",
+                    "message": "An unexpected server error occurred. Please try again later.",
+                },
+                "detail": str(exc) if ENV in ("demo", "development") else "Internal server error",
+            },
+        )
+
     for module in (
         auth, institutions, instruments, documents, requests_router, reminders,
         dashboard, ledger, reports, public, admin, ai,
     ):
         app.include_router(module.router)
 
+    def _check_db_status() -> dict[str, str]:
+        db_type = "sqlite" if is_sqlite else "postgresql"
+        try:
+            with engine.connect() as conn:
+                conn.execute(text("SELECT 1"))
+            return {"database": "connected", "database_type": db_type}
+        except Exception as exc:
+            return {"database": "disconnected", "database_type": db_type, "database_error": str(exc)}
+
+    @app.get("/health", tags=["system"])
     @app.get("/api/health", tags=["system"])
     def health():
-        return {
-            "status": "ok",
+        db_status = _check_db_status()
+        is_healthy = db_status["database"] == "connected"
+        payload = {
+            "status": "ok" if is_healthy else "degraded",
+            **db_status,
             "app": APP_NAME,
             "version": VERSION,
             "environment": ENV,
             "time": datetime.utcnow().isoformat() + "Z",
         }
+        return JSONResponse(status_code=200 if is_healthy else 503, content=payload)
 
     @app.get("/api/security/headers", tags=["system"])
     def header_policy():
