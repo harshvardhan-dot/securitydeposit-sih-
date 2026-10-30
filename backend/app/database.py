@@ -1,15 +1,31 @@
 from __future__ import annotations
 
+import os
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 from .config import DATABASE_URL
 
-connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
+is_sqlite = DATABASE_URL.startswith("sqlite")
+connect_args = {"check_same_thread": False} if is_sqlite else {}
 
-engine = create_engine(DATABASE_URL, connect_args=connect_args, future=True)
+engine_kwargs = {
+    "connect_args": connect_args,
+    "future": True,
+}
 
-if DATABASE_URL.startswith("sqlite"):
+if not is_sqlite:
+    # Recommended settings for Supabase (connection pooler / PgBouncer & direct Postgres)
+    engine_kwargs.update({
+        "pool_pre_ping": True,
+        "pool_recycle": 300,
+        "pool_size": int(os.getenv("DB_POOL_SIZE", "10")),
+        "max_overflow": int(os.getenv("DB_MAX_OVERFLOW", "20")),
+    })
+
+engine = create_engine(DATABASE_URL, **engine_kwargs)
+
+if is_sqlite:
 
     @event.listens_for(engine, "connect")
     def _sqlite_pragmas(dbapi_connection, _record):  # pragma: no cover

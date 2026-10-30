@@ -140,3 +140,11 @@ def demo_accounts():
             {"email": "auditor@aicte.gov.in", "role": "auditor", "name": "Internal Auditor", "institution": "AICTE"},
         ],
     }
+
+
+@router.get("/database-status")
+def database_status():
+    """Returns database backend status and Supabase connectivity."""
+    from ..services.supabase_client import get_supabase_status
+
+    return get_supabase_status()

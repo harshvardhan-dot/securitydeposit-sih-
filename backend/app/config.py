@@ -9,8 +9,14 @@ from __future__ import annotations
 import os
 import secrets
 from pathlib import Path
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Automatically load environment variables from backend/.env or root .env
+load_dotenv(BASE_DIR / ".env")
+load_dotenv(BASE_DIR.parent / ".env")
+
 DATA_DIR = Path(os.getenv("AICTE_DATA_DIR", BASE_DIR / "data"))
 UPLOAD_DIR = DATA_DIR / "uploads"
 SAMPLE_DIR = DATA_DIR / "samples"
@@ -34,7 +40,32 @@ APP_NAME = "AICTE Security Deposit & FDR Management Portal"
 VERSION = "1.0.0-prototype"
 ENV = os.getenv("AICTE_ENV", "demo")
 
-DATABASE_URL = os.getenv("AICTE_DATABASE_URL", f"sqlite:///{(DATA_DIR / 'aicte.db').as_posix()}")
+# Database URL resolution with Supabase / PostgreSQL support
+raw_db_url = (
+    os.getenv("SUPABASE_DB_URL")
+    or os.getenv("DATABASE_URL")
+    or os.getenv("AICTE_DATABASE_URL")
+    or ""
+).strip()
+
+if not raw_db_url:
+    DATABASE_URL = f"sqlite:///{(DATA_DIR / 'aicte.db').as_posix()}"
+else:
+    # Ensure standard SQLAlchemy dialect prefix for PostgreSQL / Supabase
+    if raw_db_url.startswith("postgres://"):
+        raw_db_url = raw_db_url.replace("postgres://", "postgresql+psycopg2://", 1)
+    elif raw_db_url.startswith("postgresql://") and not raw_db_url.startswith("postgresql+"):
+        raw_db_url = raw_db_url.replace("postgresql://", "postgresql+psycopg2://", 1)
+    DATABASE_URL = raw_db_url
+
+# Supabase API credentials
+SUPABASE_URL = os.getenv("SUPABASE_URL", "").strip()
+SUPABASE_KEY = (
+    os.getenv("SUPABASE_KEY")
+    or os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    or os.getenv("SUPABASE_ANON_KEY")
+    or ""
+).strip()
 
 JWT_SECRET = _persistent_secret("jwt", "AICTE_JWT_SECRET")
 JWT_ALGORITHM = "HS256"
@@ -45,14 +76,22 @@ FIELD_KEY_HEX = _persistent_secret("field", "AICTE_FIELD_KEY")
 # Independent key used for the prototype "digital signature" (HMAC-SHA256).
 SIGNING_KEY_HEX = _persistent_secret("signing", "AICTE_SIGNING_KEY")
 
-CORS_ORIGINS = [
+DEFAULT_CORS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:4173",
+    "http://127.0.0.1:4173",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+custom_cors = [
     o.strip()
-    for o in os.getenv(
-        "AICTE_CORS_ORIGINS",
-        "http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173",
-    ).split(",")
+    for o in os.getenv("AICTE_CORS_ORIGINS", "").split(",")
     if o.strip()
 ]
+CORS_ORIGINS = list(dict.fromkeys(DEFAULT_CORS + custom_cors))
 
 # Reminder ladder (days before maturity). FR-16, configurable at runtime via admin settings.
 DEFAULT_REMINDER_LADDER = [90, 30, 7]

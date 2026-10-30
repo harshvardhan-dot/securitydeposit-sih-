@@ -1,6 +1,13 @@
 const TOKEN_KEY = 'aicte.token'
 const USER_KEY = 'aicte.user'
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')
+
+export function resolveUrl(path: string): string {
+  if (path.startsWith('http://') || path.startsWith('https://')) return path
+  return `${API_BASE}${path}`
+}
+
 let token: string | null = localStorage.getItem(TOKEN_KEY)
 
 export class ApiError extends Error {
@@ -73,7 +80,7 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
 
   let response: Response
   try {
-    response = await fetch(path, { ...init, headers })
+    response = await fetch(resolveUrl(path), { ...init, headers })
   } catch {
     throw new ApiError(0, 'network_error', 'Cannot reach the portal. Check that the API server is running.')
   }
@@ -130,7 +137,7 @@ export function uploadFile<T>(path: string, file: File, field = 'file'): Promise
 export async function downloadFile(path: string, filename: string): Promise<void> {
   const headers = new Headers()
   if (token) headers.set('Authorization', `Bearer ${token}`)
-  const response = await fetch(path, { headers })
+  const response = await fetch(resolveUrl(path), { headers })
   if (!response.ok) throw new ApiError(response.status, 'download_failed', 'Export could not be generated.')
   const blob = await response.blob()
   const url = URL.createObjectURL(blob)

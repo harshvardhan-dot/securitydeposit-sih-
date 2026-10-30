@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+  Database,
   FingerprintPattern,
   KeyRound,
   Link2,
@@ -13,7 +14,7 @@ import {
 import { useAuth } from '../context/AuthContext'
 import { dateTimeLabel, roleLabel, shortHash } from '../lib/format'
 import { useApi } from '../lib/useApi'
-import type { AiStatus, SecurityPosture } from '../lib/types'
+import type { AiStatus, DatabaseStatus, SecurityPosture } from '../lib/types'
 import {
   Badge,
   EmptyState,
@@ -63,11 +64,12 @@ export default function SecurityPage() {
   const [refreshing, setRefreshing] = useState(false)
   const { data, loading, error, reload } = useApi<SecurityPosture>('/api/admin/security/posture')
   const { data: ai } = useApi<AiStatus>('/api/ai/status')
+  const { data: dbStatus, reload: reloadDb } = useApi<DatabaseStatus>('/api/public/database-status')
 
   const refresh = async () => {
     setRefreshing(true)
     try {
-      await reload()
+      await Promise.all([reload(), reloadDb()])
     } finally {
       setRefreshing(false)
     }
@@ -350,7 +352,55 @@ export default function SecurityPage() {
         </div>
       </Panel>
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-4 lg:grid-cols-4">
+        <Panel>
+          <SectionHeading
+            title="Database & Storage"
+            hint="Active storage backend"
+            action={
+              <div className="flex items-center gap-1.5">
+                <Database size={13} className="text-mist-400" />
+                <Badge tone={dbStatus?.is_supabase_db ? 'green' : 'mint'}>
+                  {dbStatus?.provider === 'supabase'
+                    ? 'SUPABASE'
+                    : dbStatus?.provider === 'postgresql'
+                      ? 'POSTGRESQL'
+                      : 'SQLITE'}
+                </Badge>
+              </div>
+            }
+          />
+          <InfoRow
+            label="Database engine"
+            value={
+              dbStatus?.is_supabase_db
+                ? 'Supabase PostgreSQL'
+                : dbStatus?.provider === 'postgresql'
+                  ? 'PostgreSQL'
+                  : 'SQLite (local)'
+            }
+          />
+          <InfoRow
+            label="Supabase URL"
+            value={dbStatus?.supabase_url ? shortHash(dbStatus.supabase_url) : 'Not configured'}
+          />
+          <InfoRow
+            label="API Client"
+            value={dbStatus?.api_client_ready ? 'ready' : 'fallback mode'}
+            mono
+          />
+          <InfoRow
+            label="Connection"
+            value={dbStatus?.database_url_configured ? 'configured' : 'defaults'}
+            mono
+          />
+          <p className="mt-3 text-[0.64rem] leading-relaxed text-mist-500">
+            {dbStatus?.is_supabase_db
+              ? 'Backend is connected to Supabase PostgreSQL with pooled connection management.'
+              : 'Add your SUPABASE_DB_URL in .env to switch to Supabase PostgreSQL at any time.'}
+          </p>
+        </Panel>
+
         <Panel>
           <SectionHeading title="Accountability" hint="What is recorded, and when" />
           <InfoRow label="Audit entries" value={accountability.audit_entries} mono />
@@ -386,7 +436,7 @@ export default function SecurityPage() {
             {[
               { icon: ScanLine, text: 'Bank APIs are mocked deterministically for the demo; a real adapter would sign and reconcile responses.' },
               { icon: Lock, text: 'Keys live in local files for portability. Production would use an HSM or managed KMS with rotation.' },
-              { icon: ShieldCheck, text: 'SQLite is single-node. Postgres with row-level security is the production shape.' },
+              { icon: ShieldCheck, text: dbStatus?.is_supabase_db ? 'Supabase Postgres connection active.' : 'Supports both SQLite and Supabase PostgreSQL via .env.' },
               { icon: TriangleAlert, text: 'OCR confidence is advisory; a human officer remains the decision-maker on every deposit.' },
             ].map(({ icon: Icon, text }) => (
               <div key={text} className="flex gap-2 rounded-xl border border-[color:var(--line)] inset-well px-3 py-2">

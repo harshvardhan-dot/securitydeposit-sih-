@@ -367,6 +367,17 @@ export interface AuditEntry {
   at: string | null
 }
 
+export interface DatabaseStatus {
+  provider: 'sqlite' | 'supabase' | 'postgresql' | string
+  is_supabase_db: boolean
+  has_api_credentials: boolean
+  supabase_url: string | null
+  api_client_ready: boolean
+  api_connected: boolean
+  api_error: string | null
+  database_url_configured: boolean
+}
+
 export interface VaultBox {
   id: number
   reference: string
