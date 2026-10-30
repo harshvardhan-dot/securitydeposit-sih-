@@ -3,7 +3,7 @@ echo Starting AICTE Security Deposit & FDR Management Portal...
 echo.
 
 REM Start backend FastAPI server in a new window
-start "AICTE Backend (Port 8000)" cmd /k "cd backend && python run.py --port 8000"
+start "AICTE Backend (Port 8000)" cmd /k "cd backend && python run.py --host 0.0.0.0 --port 8000 --reload"
 
 REM Start frontend Vite dev server in a new window
 start "AICTE Frontend (Port 5173)" cmd /k "cd frontend && npm.cmd run dev"

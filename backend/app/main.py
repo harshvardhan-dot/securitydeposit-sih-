@@ -60,7 +60,18 @@ def _scheduler_loop(interval_seconds: int = 300):
     return runner()
 
 
+def ensure_database_initialized():
+    try:
+        from .seed import seed_if_empty
+        Base.metadata.create_all(bind=engine)
+        seed_if_empty()
+    except Exception as exc:
+        import logging
+        logging.getLogger("uvicorn.error").warning(f"Database initialization error: {exc}")
+
+
 def create_app() -> FastAPI:
+    ensure_database_initialized()
     app = FastAPI(
         title=APP_NAME,
         version=VERSION,
@@ -177,17 +188,18 @@ def create_app() -> FastAPI:
 
 @contextlib.asynccontextmanager
 async def lifespan(app: FastAPI):
-    from .seed import seed_if_empty
-
-    Base.metadata.create_all(bind=engine)
-    seed_if_empty()
-    task = asyncio.create_task(_scheduler_loop())
+    ensure_database_initialized()
+    task = None
+    import os
+    if not os.getenv("VERCEL") and not os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+        task = asyncio.create_task(_scheduler_loop())
     try:
         yield
     finally:
-        task.cancel()
-        with contextlib.suppress(asyncio.CancelledError):
-            await task
+        if task:
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
 
 
 app = create_app()

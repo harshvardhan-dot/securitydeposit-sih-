@@ -7,7 +7,13 @@ const ENV_API_BASE = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\
 export function getApiBase(): string {
   if (typeof window !== 'undefined') {
     const custom = localStorage.getItem(API_BASE_KEY)
-    if (custom) return custom.trim().replace(/\/$/, '')
+    if (custom) {
+      // Don't use insecure http:// custom URL on HTTPS production site (prevents mixed content block)
+      if (window.location.protocol === 'https:' && custom.startsWith('http://')) {
+        return ENV_API_BASE
+      }
+      return custom.trim().replace(/\/$/, '')
+    }
   }
   return ENV_API_BASE
 }
@@ -101,14 +107,18 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   try {
     response = await fetch(primaryUrl, { ...init, headers })
   } catch (primaryErr) {
-    // If request failed (e.g. Vite proxy drop), try direct backend port 8000 if running locally on dev port
+    // If request failed (e.g. Vite proxy drop), try direct backend port 8000 if running locally or on local network
     const isDevClient =
       typeof window !== 'undefined' &&
-      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
+      (window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname.startsWith('192.168.') ||
+        window.location.port === '5173') &&
       window.location.port !== '8000'
 
     if (isDevClient && !primaryUrl.startsWith('http')) {
-      const fallbackUrl = `http://127.0.0.1:8000${primaryUrl.startsWith('/') ? '' : '/'}${primaryUrl}`
+      const fallbackHost = window.location.hostname === 'localhost' ? '127.0.0.1' : window.location.hostname
+      const fallbackUrl = `http://${fallbackHost}:8000${primaryUrl.startsWith('/') ? '' : '/'}${primaryUrl}`
       try {
         response = await fetch(fallbackUrl, { ...init, headers })
       } catch (fallbackErr) {

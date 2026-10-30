@@ -9,4 +9,7 @@ for p in (str(backend_dir), str(root_dir)):
     if p not in sys.path:
         sys.path.insert(0, p)
 
-from app.main import app  # noqa: E402
+from app.main import app, ensure_database_initialized  # noqa: E402
+
+# Ensure tables and initial seed data exist on Vercel cold starts without requiring ASGI lifespan
+ensure_database_initialized()
