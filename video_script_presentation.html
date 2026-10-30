@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SIH 2026 - AICTE FDR Management Portal - Video Script & Pitch Guide</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.5;
+    font-size: 9.5pt;
+    margin: 0;
+    padding: 0;
+  }
+  h1, h2, h3, h4 {
+    color: #0f172a;
+    margin-top: 0;
+    font-weight: 700;
+  }
+  h1 { font-size: 19pt; line-height: 1.2; margin-bottom: 4px; }
+  h2 { font-size: 13pt; border-bottom: 2px solid #3b82f6; padding-bottom: 4px; margin-top: 18pt; margin-bottom: 8pt; color: #1e3a8a; }
+  h3 { font-size: 10.5pt; margin-top: 12pt; margin-bottom: 4pt; color: #2563eb; }
+  p { margin: 0 0 6pt 0; }
+  
+  .header-box {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 16pt;
+  }
+  .header-box h1 { color: #ffffff; margin-bottom: 6px; }
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 8pt;
+    font-weight: 600;
+    color: #f1f5f9;
+  }
+  .badge.gold {
+    background: #f59e0b;
+    color: #0f172a;
+    border: none;
+  }
+  
+  .section-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 10pt;
+  }
+  
+  table.script-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 6pt;
+    margin-bottom: 12pt;
+    font-size: 8.5pt;
+  }
+  table.script-table th {
+    background-color: #1e293b;
+    color: #ffffff;
+    text-align: left;
+    padding: 6px 8px;
+    font-weight: 600;
+  }
+  table.script-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  table.script-table tr:nth-child(even) td {
+    background-color: #f8fafc;
+  }
+  .time-col { width: 14%; font-weight: 700; color: #2563eb; font-family: monospace; }
+  .visual-col { width: 32%; color: #475569; }
+  .script-col { width: 54%; color: #0f172a; }
+  
+  .quote-box {
+    border-left: 3px solid #2563eb;
+    background: #eff6ff;
+    padding: 6px 12px;
+    margin: 6pt 0;
+    font-style: italic;
+    color: #1e40af;
+  }
+  
+  .tag {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .tag-screen { background: #dbeafe; color: #1e40af; }
+  .tag-action { background: #fef3c7; color: #92400e; }
+  .tag-voice { background: #dcfce7; color: #166534; }
+  
+  .page-break {
+    page-break-before: always;
+  }
+  
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 8pt;
+  }
+  .feature-box {
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    padding: 8px 10px;
+    background: #ffffff;
+  }
+  .feature-box h4 {
+    margin: 0 0 3px 0;
+    font-size: 9pt;
+    color: #1e3a8a;
+  }
+  .feature-box p {
+    margin: 0;
+    font-size: 8pt;
+    color: #475569;
+  }
+</style>
+</head>
+<body>
+
+<div class="header-box">
+  <h1>AI-Powered Security Deposit & FDR Portal</h1>
+  <div style="font-size: 11pt; font-weight: 500; color: #93c5fd;">Smart India Hackathon 2026 · Official Video Presentation Script & Architecture Analysis</div>
+  <div class="badge-row">
+    <span class="badge gold">SIH 2026 FINALIST</span>
+    <span class="badge">Team: Truststacks</span>
+    <span class="badge">Problem Statement: AICTE Regulation Bureau</span>
+    <span class="badge">Format: 5-Minute Video (2m PPT + 3m Prototype)</span>
+  </div>
+</div>
+
+<h2>1. Executive Summary & Comparative Matrix</h2>
+<p>
+  This briefing document translates the <strong>Truststacks Hackathon Presentation Deck</strong> and the <strong>live, production-ready Prototype</strong> into a synchronized 5-minute video presentation script. AICTE manages mandatory security deposits from over 10,000 technical institutions, representing thousands of crores in institutional guarantees. The existing operational bottleneck stems from paper and email fragmentation, lack of bank validation, and zero tamper-evident auditing.
+</p>
+
+<div class="grid-2">
+  <div class="feature-box">
+    <h4>Existing Vulnerabilities (The Problem)</h4>
+    <p>• <strong>Missed Maturities:</strong> Siloed records let renewal dates lapse.<br>
+    • <strong>Forged/Duplicate FDRs:</strong> Physical scans are vulnerable to alteration.<br>
+    • <strong>Zero Real-time Visibility:</strong> Officers manually chase institutions via email.<br>
+    • <strong>Opaque Releases:</strong> Refund approvals take months with weak accountability.</p>
+  </div>
+  <div class="feature-box">
+    <h4>Truststacks Solution (The Innovation)</h4>
+    <p>• <strong>90-30-7 Automated Ladder:</strong> Daily cron reminders via SMS/WhatsApp.<br>
+    • <strong>OCR + BERT Extraction:</strong> Multi-tier AI extraction with per-field confidence.<br>
+    • <strong>SHA-256 Audit Chain:</strong> Cryptographically sealed tamper-evident ledger.<br>
+    • <strong>3D Spatial Vault:</strong> Real-time risk portfolio with 2D fallback for low-end hardware.</p>
+  </div>
+</div>
+
+<div class="quote-box">
+  <strong>Guiding Engineering Axiom:</strong> <em>"AI ADVISES · BANK CONFIRMS · OFFICERS DECIDE"</em> — The AI system never makes legal or financial commitments independently; it acts as an intelligent decision-support engine, while bank APIs corroborate authenticity and human officers exercise sovereign decision-making.
+</div>
+
+<h2>2. 5-Minute Video Timing & Teleprompter Breakdown</h2>
+
+<table class="script-table">
+  <thead>
+    <tr>
+      <th class="time-col">Timing</th>
+      <th class="visual-col">Visuals & On-Screen Actions</th>
+      <th class="script-col">Verbatim Narration Script (Voiceover)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="time-col">0:00 - 0:25<br>(25 sec)</td>
+      <td>
+        <span class="tag tag-screen">SLIDE 1: INTRO</span><br>
+        Title card with SIH logo, Team Truststacks, and AICTE emblem.<br>
+        <span class="tag tag-action">ZOOM ON:</span> Left side ("EXISTING PROBLEM" icons: Missed Maturities, Tampered FDRs).
+      </td>
+      <td>
+        "Namaste judges. Technical institutions across India submit thousands of crores in security deposits to AICTE as Fixed Deposit Receipts. Yet today, this regulatory backbone suffers from a critical blind spot: fragmented records, missed maturity dates that cost the government crores, manual re-keying by overburdened officers, and worst of all—zero mathematical defense against forged or altered FDR receipts. We are Team Truststacks, and this is our solution: the AI-Powered Security Deposit and FDR Management Portal."
+      </td>
+    </tr>
+    <tr>
+      <td class="time-col">0:25 - 0:55<br>(30 sec)</td>
+      <td>
+        <span class="tag tag-screen">SLIDE 1: CENTER</span><br>
+        Highlight: "PROPOSED SOLUTION" and the <strong>90-30-7 Reminder Ladder</strong>.<br>
+        Show lifecycle animation: Upload → AI Clean-up → Bank Verification → Ledger Sealing.
+      </td>
+      <td>
+        "Our platform replaces chaotic email chains with a unified, zero-trust portal. The core philosophy is simple: AI advises, banks confirm, and officers decide. Every uploaded deposit goes through document clean-up, OCR and BERT entity extraction, and is cross-checked against our automated 90, 30, and 7-day escalation ladder. If a maturity is approaching, the institution receives automated reminders across Email and WhatsApp. If it expires, it is instantly escalated to regional officers."
+      </td>
+    </tr>
+    <tr>
+      <td class="time-col">0:55 - 1:25<br>(30 sec)</td>
+      <td>
+        <span class="tag tag-screen">SLIDE 1: RIGHT</span><br>
+        Highlight: "WHAT MAKES IT UNIQUE?"<br>
+        Four pillars: OCR+BERT, 0-100 Trust Score, Tamper-Proof Ledger, 3D Vault.
+      </td>
+      <td>
+        "What makes Truststacks truly unique? First, an OCR plus multilingual BERT pipeline that delivers per-field confidence scores and catches duplicate deposits instantly. Second, our dynamic 0 to 100 Trust Score that ranks regulatory risk so officers review high-risk cases first. Third, an immutable SHA-256 hash-chained ledger where every approval is digitally signed. And fourth, our interactive 3D Vault designed with an adaptive 2D fallback so it runs smoothly on any basic government computer."
+      </td>
+    </tr>
+    <tr>
+      <td class="time-col">1:25 - 1:45<br>(20 sec)</td>
+      <td>
+        <span class="tag tag-screen">SLIDE 2: TECH STACK</span><br>
+        FastAPI, PostgreSQL/Supabase, React, AES-256-GCM, TLS 1.3, DPDP Act 2023.
+      </td>
+      <td>
+        "Our architecture is 100% open-source and government-cloud ready. Powered by FastAPI, PostgreSQL with Supabase cloud scaling, AES-256-GCM field encryption, and Ed25519 officer signatures. It strictly adheres to the Digital Personal Data Protection Act of 2023, ensuring that sensitive financial amounts and account numbers are never exposed in plaintext."
+      </td>
+    </tr>
+    <tr>
+      <td class="time-col">1:45 - 2:00<br>(15 sec)</td>
+      <td>
+        <span class="tag tag-screen">SLIDE 3: IMPACT</span><br>
+        Show key metrics: 95%+ Accuracy, &lt;2 Min Review, 100% Tamper Detection.<br>
+        <span class="tag tag-action">TRANSITION:</span> Screen switch to live browser.
+      </td>
+      <td>
+        "Our benchmark targets speak for themselves: over 95% extraction accuracy, reducing upload-to-review time to under two minutes, and 100% detection of unauthorized data modifications. But don't just take our slides for it—let us take you inside the live, running system right now."
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>3. Part 2: Working Prototype Live Walkthrough (3:00 Minutes)</h2>
+
+<table class="script-table">
+  <thead>
+    <tr>
+      <th class="time-col">Timing</th>
+      <th class="visual-col">Live Screen Recording & UI Cues</th>
+      <th class="script-col">Verbatim Narration Script (Voiceover)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="time-col">2:00 - 2:30<br>(30 sec)</td>
+      <td>
+        <span class="tag tag-screen">BROWSER: /track</span><br>
+        Show public courier tracker.<br>
+        <span class="tag tag-action">ACTION:</span> Enter reference <code>AICTE-FDR-2026-00002</code>.<br>
+        Show 5-stage timeline. Show masked number <code>••••••••1234</code>. Show 404 test on invalid ID.
+      </td>
+      <td>
+        "We start at the Public Deposit Tracker. Just like an express courier shipment, any institution or citizen can enter their deposit reference number. Notice how the portal displays the live lifecycle status—from submission, to bank confirmation, to maturity tracking—without exposing any confidential bank account numbers or financial sums. Total transparency, zero data leakage."
+      </td>
+    </tr>
+    <tr>
+      <td class="time-col">2:30 - 3:15<br>(45 sec)</td>
+      <td>
+        <span class="tag tag-screen">BROWSER: /login → /submit</span><br>
+        Click 'Principal, Sunrise Institute'.<br>
+        <span class="tag tag-action">ACTION:</span> Upload Canara Bank receipt PDF.<br>
+        Show AI scan processing animation.<br>
+        Show pre-filled fields & confidence scores (98%, 94%).
+      </td>
+      <td>
+        "Now let's sign in as an institution—Dr. Meera Joshi, Principal of Sunrise Institute. To deposit a new FDR, she opens our Intake Wizard and uploads a scanned receipt. Watch as our background pipeline immediately cleans the image, runs OCR, and executes BERT entity recognition. In seconds, the FDR number, issuing bank, branch, amount, and maturity date are extracted with individual confidence percentages. Even if the scan was taken on a basic phone camera, our AI identifies the fields and lets the principal review and confirm."
+      </td>
+    </tr>
+    <tr>
+      <td class="time-col">3:15 - 3:55<br>(40 sec)</td>
+      <td>
+        <span class="tag tag-screen">BROWSER: /vault & /review</span><br>
+        Switch user to <code>verify@aicte.gov.in</code>.<br>
+        <span class="tag tag-action">ACTION:</span> Open 3D Vault. Rotate interactive crystal cubes.<br>
+        Click on flagged item → Open Review side-by-side modal. Click 'Reconcile with Mock Bank API'.
+      </td>
+      <td>
+        "Let's switch roles to our AICTE Verification Officer. Here is the 3D Interactive Vault: every glowing node represents an institution's deposit, color-coded by regulatory status—active, expiring, matured, or flagged. For officers on low-powered laptops, a single click switches to our ultra-fast 2D grid. In the review queue, the officer compares the original document side-by-side with our AI extraction. One click triggers our mock Core Banking API: the bank confirms the FDR exists, and our 0-to-100 Trust Score dynamically updates to 92%."
+      </td>
+    </tr>
+    <tr>
+      <td class="time-col">3:55 - 4:35<br>(40 sec)</td>
+      <td>
+        <span class="tag tag-screen">BROWSER: /ledger</span><br>
+        Show Audit Ledger table.<br>
+        Point to green banner: 'Chain Valid - 100% Integrity'.<br>
+        <span class="tag tag-action">CLIMAX ACTION:</span> Click 'Simulate Database Tamper'.<br>
+        Watch screen instantly flash RED with block index breach alert!
+      </td>
+      <td>
+        "Now, for the ultimate demonstration: integrity. Under the hood, every officer action, verification, and state change is cryptographically sealed into a SHA-256 hash-chained ledger. Right now, the chain is valid. But what happens if a corrupt insider directly tampers with a record in the database? Let's simulate that right now. Look at the screen: the system immediately detects the corrupted hash, breaks the chain, flashes a red tamper alert, and pinpoints the exact block number where the alteration took place. Unforgivable tamper-evidence."
+      </td>
+    </tr>
+    <tr>
+      <td class="time-col">4:35 - 5:00<br>(25 sec)</td>
+      <td>
+        <span class="tag tag-screen">BROWSER: /security</span><br>
+        Show Security & Cloud Posture.<br>
+        Highlight active Supabase PostgreSQL connection, AES-256-GCM encryption, TLS 1.3.<br>
+        Closing team slate.
+      </td>
+      <td>
+        "Finally, on our Security Posture panel, you can see live Supabase PostgreSQL connectivity, AES-256-GCM field encryption, and Ed25519 digital key signatures. Team Truststacks doesn't just build a portal; we provide AICTE with an airtight, mathematically verifiable financial fortress. Thank you, and we welcome your questions!"
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>4. Judge Q&A Defense & Rebuttal Guide (Top 5 Hard Questions)</h2>
+
+<div class="section-card">
+  <strong>Q1: "What happens if an institution uploads a crumpled, blurred, or Hindi-language receipt?"</strong><br>
+  <em>Defense:</em> "Our preprocessing pipeline applies adaptive contrast stretching, orientation correction, and de-skewing before feeding text to Tesseract and multilingual BERT. If any field's confidence drops below 70%, the portal flags the field in amber, prompts the user to verify or retake, and requires mandatory human confirmation before ledger hashing. The system degrades gracefully to hashed n-grams if GPU models are absent."
+</div>
+
+<div class="section-card">
+  <strong>Q2: "Why not use a public blockchain like Ethereum or Polygon?"</strong><br>
+  <em>Defense:</em> "Public blockchains introduce volatile gas fees, latency bottlenecks, and legal liabilities regarding the Right to be Forgotten under the DPDP Act 2023. Our SHA-256 internal hash chain provides microsecond validation, zero transaction costs, and complete privacy by storing only non-reversible hashes, with a straightforward migration path to Hyperledger Fabric for permissioned inter-agency federation."
+</div>
+
+<div class="section-card">
+  <strong>Q3: "How does the portal handle live bank integrations when banks don't have public APIs?"</strong><br>
+  <em>Defense:</em> "We implemented a modular Bank Integration Adapter interface. In this prototype, deterministic mock responses validate the workflow. In production, this adapter plugs directly into NPCI e-NACH/e-Sign APIs, SFTP batch reconciliation formats used by nationalized banks, or direct treasury APIs without changing any core portal code."
+</div>
+
+<div class="section-card">
+  <strong>Q4: "Can high-end 3D graphics run on low-end computers in regional AICTE offices?"</strong><br>
+  <em>Defense:</em> "Yes. Our Three.js Vault features automatic WebGL performance profiling. If frame rates drop or WebGL is unsupported, it automatically falls back to an ultra-lightweight SVG 2D grid that requires zero GPU acceleration and loads in under 30 milliseconds."
+</div>
+
+<div class="section-card">
+  <strong>Q5: "How does this prevent fraudulent duplicate FDR submissions across different institutions?"</strong><br>
+  <em>Defense:</em> "When an FDR is submitted, we generate a canonical, non-reversible SHA-256 digest of the normalized FDR number and issuing bank. This duplicate hash is indexed across the entire national database. If Institution B attempts to submit an FDR already held by Institution A, the system flags it as an immediate duplicate collision, even if the image file itself was re-scanned or modified."
+</div>
+
+<div style="margin-top: 15pt; font-size: 8pt; color: #64748b; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 6pt;">
+  Smart India Hackathon 2026 · AICTE Security Deposit & FDR Management Portal · Developed by Team Truststacks · Version 1.0.0
+</div>
+
+</body>
+</html>
