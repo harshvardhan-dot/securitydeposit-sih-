@@ -79,10 +79,28 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   headers.set('Accept', 'application/json')
 
   let response: Response
+  const primaryUrl = resolveUrl(path)
   try {
-    response = await fetch(resolveUrl(path), { ...init, headers })
-  } catch {
-    throw new ApiError(0, 'network_error', 'Cannot reach the portal. Check that the API server is running.')
+    response = await fetch(primaryUrl, { ...init, headers })
+  } catch (primaryErr) {
+    // If request failed (e.g. Vite proxy drop), try direct backend port 8000 if running locally on dev port
+    const isDevClient =
+      typeof window !== 'undefined' &&
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
+      window.location.port !== '8000'
+
+    if (isDevClient && !primaryUrl.startsWith('http')) {
+      const fallbackUrl = `http://127.0.0.1:8000${primaryUrl.startsWith('/') ? '' : '/'}${primaryUrl}`
+      try {
+        response = await fetch(fallbackUrl, { ...init, headers })
+      } catch (fallbackErr) {
+        console.error('API fetch failed on primary and fallback:', { primaryUrl, fallbackUrl, primaryErr, fallbackErr })
+        throw new ApiError(0, 'network_error', 'Cannot reach the portal. Check that the API server is running.')
+      }
+    } else {
+      console.error('API fetch failed:', { primaryUrl, primaryErr })
+      throw new ApiError(0, 'network_error', 'Cannot reach the portal. Check that the API server is running.')
+    }
   }
 
   const payload = await parseResponse(response)

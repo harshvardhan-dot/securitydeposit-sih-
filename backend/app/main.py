@@ -71,6 +71,7 @@ def create_app() -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=CORS_ORIGINS,
+        allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$",
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -87,9 +88,13 @@ def create_app() -> FastAPI:
         response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
         response.headers.setdefault(
             "Content-Security-Policy",
-            "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; "
-            "script-src 'self'; connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 "
-            "http://localhost:5173 ws://localhost:5173; font-src 'self' data:; frame-ancestors 'none'",
+            "default-src 'self' 'unsafe-inline' data: blob:; "
+            "img-src 'self' data: blob:; "
+            "style-src 'self' 'unsafe-inline'; "
+            "script-src 'self' 'unsafe-inline'; "
+            "connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://*.supabase.co wss://*.supabase.co; "
+            "font-src 'self' data:; "
+            "frame-ancestors 'none'",
         )
         if request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https":
             response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"

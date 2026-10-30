@@ -58,7 +58,7 @@ def ensure_certificate() -> tuple[str, str]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="AICTE FDR Management Portal (prototype)")
-    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--port", type=int, default=8000)
     parser.add_argument("--tls", action="store_true", help="serve HTTPS with a generated certificate")
     parser.add_argument("--reset", action="store_true", help="delete and re-seed the database")
