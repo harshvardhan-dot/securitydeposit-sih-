@@ -71,7 +71,7 @@ def create_app() -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=CORS_ORIGINS,
-        allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$",
+        allow_origin_regex=r"^https?://((localhost|127\.0\.0\.1)(:[0-9]+)?|.*\.vercel\.app|.*\.railway\.app|.*\.onrender\.com)$",
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -88,12 +88,12 @@ def create_app() -> FastAPI:
         response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
         response.headers.setdefault(
             "Content-Security-Policy",
-            "default-src 'self' 'unsafe-inline' data: blob:; "
-            "img-src 'self' data: blob:; "
-            "style-src 'self' 'unsafe-inline'; "
-            "script-src 'self' 'unsafe-inline'; "
-            "connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://*.supabase.co wss://*.supabase.co; "
-            "font-src 'self' data:; "
+            "default-src 'self' 'unsafe-inline' data: blob: https:; "
+            "img-src 'self' data: blob: https:; "
+            "style-src 'self' 'unsafe-inline' https:; "
+            "script-src 'self' 'unsafe-inline' https:; "
+            "connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://*.vercel.app https://*.supabase.co wss://*.supabase.co https:; "
+            "font-src 'self' data: https:; "
             "frame-ancestors 'none'",
         )
         if request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https":

@@ -22,7 +22,7 @@ import {
   Vault,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
-import { apiGet, errorMessage } from '../lib/api'
+import { apiGet, errorMessage, getApiBase, setApiBase } from '../lib/api'
 import { roleLabel } from '../lib/format'
 import { HeroCrystal } from '../components/HeroCrystal'
 import { ThemeToggle } from '../components/ThemeToggle'
@@ -36,6 +36,16 @@ interface DemoAccount {
 }
 
 const DEMO_PASSWORD = 'Aicte@2026'
+
+const DEFAULT_DEMO_ACCOUNTS: DemoAccount[] = [
+  { email: 'principal@sunrise.edu', role: 'institution', name: 'Dr. Meera Joshi', institution: 'Sunrise Institute of Technology' },
+  { email: 'dean@ganga.edu', role: 'institution', name: 'Prof. Rakesh Verma', institution: 'Ganga College of Engineering' },
+  { email: 'scrutiny@aicte.gov.in', role: 'scrutiny_officer', name: 'A. K. Sharma', institution: 'AICTE Regulation Bureau' },
+  { email: 'verify@aicte.gov.in', role: 'verification_officer', name: 'S. Nair', institution: 'AICTE Regulation Bureau' },
+  { email: 'authority@aicte.gov.in', role: 'competent_authority', name: 'Dr. R. Iyer', institution: 'AICTE Regulation Bureau' },
+  { email: 'admin@aicte.gov.in', role: 'admin', name: 'System Administrator', institution: 'AICTE' },
+  { email: 'auditor@aicte.gov.in', role: 'auditor', name: 'Internal Auditor', institution: 'AICTE' },
+]
 
 const ROLE_ORDER = [
   'institution',
@@ -54,7 +64,7 @@ const FEATURES = [
 ]
 
 export default function LoginPage() {
-  const { user, login, verifyMfa, notice, clearNotice } = useAuth()
+  const { user, login, loginDemo, verifyMfa, notice, clearNotice } = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState('principal@sunrise.edu')
   const [password, setPassword] = useState(DEMO_PASSWORD)
@@ -65,8 +75,10 @@ export default function LoginPage() {
   const [challenge, setChallenge] = useState('')
   const [code, setCode] = useState('')
   const [hint, setHint] = useState<{ code: string; note: string } | null>(null)
-  const [accounts, setAccounts] = useState<DemoAccount[]>([])
+  const [accounts, setAccounts] = useState<DemoAccount[]>(DEFAULT_DEMO_ACCOUNTS)
   const [accountsOpen, setAccountsOpen] = useState(true)
+  const [showConfig, setShowConfig] = useState(false)
+  const [apiUrl, setApiUrl] = useState(getApiBase())
 
   useEffect(() => {
     if (user) navigate('/', { replace: true })
@@ -278,9 +290,72 @@ export default function LoginPage() {
               </div>
 
               {error ? (
-                <div className="flex items-start gap-2 border-b border-rose-400/25 bg-rose-400/10 px-6 py-3 text-[0.74rem] text-rose-300">
-                  <TriangleAlert size={15} className="mt-0.5 shrink-0" />
-                  <span className="leading-relaxed">{error}</span>
+                <div className="border-b border-rose-400/25 bg-rose-400/10 px-6 py-3 text-[0.74rem] text-rose-300">
+                  <div className="flex items-start gap-2">
+                    <TriangleAlert size={15} className="mt-0.5 shrink-0" />
+                    <span className="leading-relaxed">{error}</span>
+                  </div>
+                  <div className="mt-2.5 flex flex-wrap items-center gap-2 border-t border-rose-400/20 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const targetAccount = accounts.find((a) => a.email === email) ?? {
+                          email,
+                          name: email.split('@')[0],
+                          role: 'institution' as const,
+                          institution: 'Demo Institution',
+                        }
+                        loginDemo({
+                          email: targetAccount.email,
+                          name: targetAccount.name,
+                          role: targetAccount.role as any,
+                          institution: targetAccount.institution,
+                        })
+                        navigate('/', { replace: true })
+                      }}
+                      className="rounded-lg border border-mint-400/40 bg-mint-400/15 px-2.5 py-1 text-[0.68rem] font-medium text-mint-200 transition hover:bg-mint-400/25"
+                    >
+                      Continue in Demo Mode
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowConfig((c) => !c)}
+                      className="rounded-lg border border-mist-500/30 bg-mist-500/10 px-2.5 py-1 text-[0.68rem] font-medium text-mist-300 transition hover:bg-mist-500/20"
+                    >
+                      {showConfig ? 'Hide API URL Settings' : 'Configure Backend URL'}
+                    </button>
+                  </div>
+                </div>
+              ) : null}
+
+              {showConfig ? (
+                <div className="border-b border-[color:var(--line)] bg-[color:var(--well-bg)] px-6 py-3.5 text-xs">
+                  <label className="block">
+                    <span className="label !text-[0.68rem]">Custom Backend API Base URL</span>
+                    <div className="mt-1 flex gap-2">
+                      <input
+                        type="url"
+                        value={apiUrl}
+                        onChange={(e) => setApiUrl(e.target.value)}
+                        placeholder="e.g. https://your-backend.railway.app or http://localhost:8000"
+                        className="input flex-1 !py-1.5 !text-xs"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setApiBase(apiUrl)
+                          setError(null)
+                          window.location.reload()
+                        }}
+                        className="btn btn-secondary shrink-0 !py-1.5 !text-xs"
+                      >
+                        Save & Reload
+                      </button>
+                    </div>
+                    <span className="mt-1 block text-[0.64rem] text-mist-500">
+                      On Vercel, you can also set the <code>VITE_API_BASE_URL</code> environment variable.
+                    </span>
+                  </label>
                 </div>
               ) : null}
 

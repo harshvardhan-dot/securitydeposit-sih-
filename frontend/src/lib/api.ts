@@ -1,11 +1,29 @@
 const TOKEN_KEY = 'aicte.token'
 const USER_KEY = 'aicte.user'
+const API_BASE_KEY = 'aicte.api_base'
 
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')
+const ENV_API_BASE = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/$/, '')
+
+export function getApiBase(): string {
+  if (typeof window !== 'undefined') {
+    const custom = localStorage.getItem(API_BASE_KEY)
+    if (custom) return custom.trim().replace(/\/$/, '')
+  }
+  return ENV_API_BASE
+}
+
+export function setApiBase(url: string | null): void {
+  if (typeof window !== 'undefined') {
+    if (url && url.trim()) localStorage.setItem(API_BASE_KEY, url.trim().replace(/\/$/, ''))
+    else localStorage.removeItem(API_BASE_KEY)
+  }
+}
 
 export function resolveUrl(path: string): string {
   if (path.startsWith('http://') || path.startsWith('https://')) return path
-  return `${API_BASE}${path}`
+  const base = getApiBase()
+  if (base) return `${base}${path.startsWith('/') ? '' : '/'}${path}`
+  return path
 }
 
 let token: string | null = localStorage.getItem(TOKEN_KEY)

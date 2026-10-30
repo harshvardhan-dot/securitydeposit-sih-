@@ -17,11 +17,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 load_dotenv(BASE_DIR.parent / ".env")
 
-DATA_DIR = Path(os.getenv("AICTE_DATA_DIR", BASE_DIR / "data"))
+# Use /tmp on Vercel/serverless environments where root filesystem is read-only
+if os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+    DATA_DIR = Path(os.getenv("AICTE_DATA_DIR", "/tmp/aicte_data"))
+else:
+    DATA_DIR = Path(os.getenv("AICTE_DATA_DIR", BASE_DIR / "data"))
+
 UPLOAD_DIR = DATA_DIR / "uploads"
 SAMPLE_DIR = DATA_DIR / "samples"
 for _d in (DATA_DIR, UPLOAD_DIR, SAMPLE_DIR):
-    _d.mkdir(parents=True, exist_ok=True)
+    try:
+        _d.mkdir(parents=True, exist_ok=True)
+    except Exception:
+        pass
 
 
 def _persistent_secret(name: str, env_var: str) -> str:
@@ -30,9 +38,15 @@ def _persistent_secret(name: str, env_var: str) -> str:
         return value
     path = DATA_DIR / f"{name}.key"
     if path.exists():
-        return path.read_text(encoding="utf-8").strip()
+        try:
+            return path.read_text(encoding="utf-8").strip()
+        except Exception:
+            pass
     value = secrets.token_hex(32)
-    path.write_text(value, encoding="utf-8")
+    try:
+        path.write_text(value, encoding="utf-8")
+    except Exception:
+        pass
     return value
 
 

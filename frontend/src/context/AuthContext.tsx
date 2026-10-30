@@ -26,6 +26,7 @@ interface AuthContextValue {
   notice: string | null
   clearNotice: () => void
   login: (email: string, password: string) => Promise<LoginResult>
+  loginDemo: (account: { email: string; name: string; role: Role; institution?: string }) => User
   verifyMfa: (code: string, challengeToken: string) => Promise<User>
   logout: (reason?: string) => Promise<void>
   refreshUser: () => Promise<void>
@@ -54,10 +55,42 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   )
 
   const refreshUser = useCallback(async () => {
+    const currentToken = getToken()
+    if (currentToken && currentToken.startsWith('demo_token_')) {
+      const cached = readCachedUser<User>()
+      if (cached) {
+        setUser(cached)
+        return
+      }
+    }
     const next = await apiGet<User>('/api/auth/me')
     setUser(next)
     cacheUser(next)
   }, [])
+
+  const loginDemo = useCallback(
+    (account: { email: string; name: string; role: Role; institution?: string }) => {
+      const demoUser: User = {
+        id: 1,
+        email: account.email,
+        name: account.name,
+        role: account.role,
+        institution_id: account.role === 'institution' ? 1 : null,
+        institution: account.institution ?? null,
+        language: 'en',
+        mfa_enabled: false,
+        key_id: 'ed25519-demo',
+        last_login_at: new Date().toISOString(),
+      }
+      const fakeToken = `demo_token_${btoa(unescape(encodeURIComponent(JSON.stringify(demoUser))))}`
+      setToken(fakeToken)
+      cacheUser(demoUser)
+      setUser(demoUser)
+      lastActivity.current = Date.now()
+      return demoUser
+    },
+    [],
+  )
 
   useEffect(() => {
     let cancelled = false
@@ -192,6 +225,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         notice,
         clearNotice: () => setNotice(null),
         login,
+        loginDemo,
         verifyMfa,
         logout,
         refreshUser,
