@@ -82,7 +82,6 @@ const NAV_GROUPS: { label: string; items: NavItem[] }[] = [
         to: '/ledger',
         labelKey: 'nav.ledger',
         icon: Link2,
-        roles: ['scrutiny_officer', 'verification_officer', 'competent_authority', 'admin', 'auditor'],
       },
       { to: '/reports', labelKey: 'nav.reports', icon: ChartBar },
       { to: '/institutions', labelKey: 'nav.institutions', icon: Building },

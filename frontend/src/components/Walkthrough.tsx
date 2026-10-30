@@ -222,7 +222,7 @@ export function Walkthrough() {
                     type="button"
                     onClick={() => {
                       close()
-                      navigate('/audit')
+                      navigate('/ledger')
                     }}
                     className="btn btn-primary !py-1.5"
                   >

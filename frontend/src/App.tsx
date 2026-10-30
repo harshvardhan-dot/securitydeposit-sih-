@@ -81,14 +81,9 @@ export default function App() {
           <Route path="requests" element={<RequestsPage />} />
           <Route path="requests/:id" element={<RequestDetailPage />} />
           <Route path="reminders" element={<RemindersPage />} />
-          <Route
-            path="ledger"
-            element={
-              <RoleGate roles={['scrutiny_officer', 'verification_officer', 'competent_authority', 'admin', 'auditor']}>
-                <LedgerPage />
-              </RoleGate>
-            }
-          />
+          <Route path="ledger" element={<LedgerPage />} />
+          <Route path="audit" element={<Navigate to="/ledger" replace />} />
+          <Route path="audit-ledger" element={<Navigate to="/ledger" replace />} />
           <Route path="reports" element={<ReportsPage />} />
           <Route path="institutions" element={<InstitutionsPage />} />
           <Route path="institutions/:id" element={<InstitutionDetailPage />} />
